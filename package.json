@@ -1,0 +1,32 @@
+{
+  "name": "@chengzs/zeform",
+  "version": "1.0.2",
+  "description": "基于 antd 的表单组件，使用 json 配置表单，内置多种拓展，api 不变但能实现高速开发",
+  "keywords": [
+    "antd",
+    "form",
+    "components"
+  ],
+  "author": "chengzs",
+  "license": "ISC",
+  "repository": "",
+  "main": "lib/bundle.js",
+  "scripts": {
+    "dev": "npx rollup -wc rollup.config.mjs",
+    "build": "npx rollup -c rollup.config.mjs"
+  },
+  "peerDependencies": {
+    "react": ">=18"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.24.6",
+    "@babel/preset-env": "^7.24.6",
+    "@babel/preset-react": "^7.24.6",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-commonjs": "^25.0.8",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "rollup": "^4.18.0"
+  }
+}
