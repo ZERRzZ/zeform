@@ -9,3 +9,34 @@
 或
 
 `yarn add @chengzs/zeform`
+
+# 基础使用
+
+```tsx
+function App() {
+  const items: ZeFormItem[] = [
+    {
+      type: "input",
+      item: { name: "name", label: "姓名" },
+    },
+    {
+      type: "password",
+      item: { name: "pass", label: "密码" },
+    },
+    {
+      type: "submit",
+    },
+    {
+      type: "reset",
+    },
+  ];
+  return (
+    <>
+      <ZeForm
+        form={{ layout: "inline", onFinish: (v) => console.log(v) }}
+        items={items}
+      />
+    </>
+  );
+}
+```

@@ -1,9 +1,10 @@
-import resolve from '@rollup/plugin-node-resolve';
 import babel from '@rollup/plugin-babel';
 import commonjs from '@rollup/plugin-commonjs';
+import resolve from '@rollup/plugin-node-resolve';
+import tsPlugin from '@rollup/plugin-typescript';
 
 export default {
-  input: 'src/index.js',
+  input: 'src/index.ts',
   output: [
     {
       file: 'lib/bundle.js',
@@ -11,9 +12,10 @@ export default {
     },
   ],
   plugins: [
-    resolve(),
+    babel(),
     commonjs(),
-    babel()
+    resolve(),
+    tsPlugin()
   ],
-  external: ['react'] // react为外部引入,所以不需要打包进去
+  external: ['@ant-design/icons', 'antd', 'react'] // react为外部引入,所以不需要打包进去
 }

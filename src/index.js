@@ -1,1 +1,0 @@
-export { default as ShowTitle } from './components/ShowTitle.jsx'
