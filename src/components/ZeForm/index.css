@@ -1,0 +1,36 @@
+.zeform-list {
+  display: flex;
+  gap: 1em;
+  align-items: flex-start;
+}
+
+.zeform-list .ant-form-item {
+  flex: auto;
+}
+
+.zeform-list .ant-row {
+  flex-direction: column;
+}
+
+.zeform-list .ant-row .ant-form-item-label {
+  text-align: start;
+}
+
+.zeform-list .ant-row .ant-form-item-control {
+  flex: 1 1 auto;
+}
+
+.zeform-list-first-btn {
+  margin-top: 32px;
+}
+
+.zeform-list-btn {
+  color: #999;
+  font-size: 1.8em;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.zeform-list-btn:hover {
+  color: #777;
+}

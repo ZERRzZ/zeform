@@ -4,13 +4,15 @@
 
 # 使用
 
-`npm i @chengzs/zeform`
-
-或
-
-`yarn add @chengzs/zeform`
+`npm i @chengzs/zeform` 或 `yarn add @chengzs/zeform`
 
 # 基础使用
+
+引入 css
+
+`@import '@chengzs/zeform/lib/zeform.css' ;`
+
+页面中使用
 
 ```tsx
 function App() {

@@ -2,6 +2,7 @@ import React, { useMemo } from "react"
 import { Button, Cascader, Checkbox, Col, ColorPicker, Form, Input, InputNumber, Mentions, Radio, Rate, Row, Select, Slider, Switch } from "antd"
 import { DownCircleOutlined, MinusCircleOutlined, PlusOutlined, UpCircleOutlined } from '@ant-design/icons'
 import { ZeFormItem, ZeFormProps } from "./type"
+import './index.css'
 
 export default function ZeForm({ form, items }: ZeFormProps) {
 
@@ -49,9 +50,9 @@ export default function ZeForm({ form, items }: ZeFormProps) {
       // case 'myDocUpload': return <MyDocUpload {...item.option}>{item.innerHtml}</MyDocUpload>
       // case 'myFileUpload': return <MyFileUpload {...item.option}>{item.innerHtml}</MyFileUpload>
       case 'button': return <Button {...item.option}>{item.innerHtml}</Button>
-      case 'custom': return item.innerHtml
       case 'submit': return <Button htmlType='submit' type="primary" {...item.option}>{item.innerHtml || '提交'}</Button>
       case 'reset': return <Button htmlType="reset" {...item.option}>{item.innerHtml || '重置'}</Button>
+      case 'custom': return item.innerHtml
       // case 'cron': return <MyCron {...item.option} />
       // case 'oneLevelOpt': return <MyOneLevelOpt {...item.option} />
       // case 'multiLevelOpt': return <MyMultiLevelOpt {...item.option} />
@@ -63,7 +64,7 @@ export default function ZeForm({ form, items }: ZeFormProps) {
   const initSpan = useMemo(() => form?.layout !== 'inline' ? 24 : undefined, [form])
 
   return (
-    <Form {...form}>
+    <Form labelCol={{ span: 8 }} {...form}>
       <Row gutter={form?.gutter || 24}>
         {
           items?.map((v, i) =>
@@ -92,18 +93,15 @@ export default function ZeForm({ form, items }: ZeFormProps) {
                                           {renderFormItem(vv)}
                                         </Form.Item>)
                                   }
+                                  <MinusCircleOutlined className={`zeform-list-btn ${index ? '' : 'zeform-list-first-btn'}`} onClick={() => remove(name)} />
                                   {
-                                    <>
-                                      <MinusCircleOutlined className={`zeform-list-btn ${index ? '' : 'zeform-list-first-btn'}`} onClick={() => remove(name)} />
-                                      {
-                                        v.list?.isMove ?
-                                          <>
-                                            <UpCircleOutlined className={`zeform-list-btn ${index ? '' : 'zeform-list-first-btn'}`} onClick={() => move(index, index - 1)} />
-                                            <DownCircleOutlined className={`zeform-list-btn ${index ? '' : 'zeform-list-first-btn'}`} onClick={() => move(index, index + 1)} />
-                                          </>
-                                          : ''
-                                      }
-                                    </>
+
+                                    v.list?.isMove ?
+                                      <>
+                                        <UpCircleOutlined className={`zeform-list-btn ${index ? '' : 'zeform-list-first-btn'}`} onClick={() => move(index, index - 1)} />
+                                        <DownCircleOutlined className={`zeform-list-btn ${index ? '' : 'zeform-list-first-btn'}`} onClick={() => move(index, index + 1)} />
+                                      </>
+                                      : ''
                                   }
                                 </div>
                               )
