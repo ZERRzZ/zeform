@@ -24,5 +24,5 @@ export default {
       plugins: [autoprefixer()]
     }),
   ],
-  external: ['@ant-design/icons', 'antd', 'react'] // react为外部引入,所以不需要打包进去
+  external: ['@ant-design/icons', 'antd', 'react', 'dayjs'] // react为外部引入,所以不需要打包进去
 }

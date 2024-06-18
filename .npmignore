@@ -3,3 +3,5 @@
 babel.config.json
 package-lock.json
 rollup.config.mjs
+.browserslist
+tsconfig.json
