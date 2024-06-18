@@ -1,7 +1,8 @@
 import React, { useMemo } from "react"
-import { Button, Cascader, Checkbox, Col, ColorPicker, Form, Input, InputNumber, Mentions, Radio, Rate, Row, Select, Slider, Switch } from "antd"
+import { Button, Cascader, Checkbox, Col, ColorPicker, ConfigProvider, Form, Input, InputNumber, Mentions, Radio, Rate, Row, Select, Slider, Switch } from "antd"
 import { DownCircleOutlined, MinusCircleOutlined, PlusOutlined, UpCircleOutlined } from '@ant-design/icons'
 import { ZeFormItem, ZeFormProps } from "./type"
+import ZeTimeDate from "../ZeTimeDate"
 import './index.css'
 
 export default function ZeForm({ form, items }: ZeFormProps) {
@@ -33,16 +34,16 @@ export default function ZeForm({ form, items }: ZeFormProps) {
       case 'slider': return <Slider {...item.option} />
       case 'switch': return <Switch {...item.option} />
       case 'color': return <ColorPicker format="hex" {...item.option} />
-      // case 'year':
-      // case 'month':
-      // case 'date':
-      // case 'time':
-      // case 'dateTime':
-      // case 'yearRange':
-      // case 'monthRange':
-      // case 'dateRange':
-      // case 'timeRange':
-      // case 'dateTimeRange': return <MyTimeDate type={item.type} option={item.option} />
+      case 'year':
+      case 'month':
+      case 'date':
+      case 'time':
+      case 'dateTime':
+      case 'yearRange':
+      case 'monthRange':
+      case 'dateRange':
+      case 'timeRange':
+      case 'dateTimeRange': return <ZeTimeDate type={item.type} option={item.option} />
       // case 'upload': return <Upload {...item.option}>{item.innerHtml}</Upload>
       // case 'myUpload': return <MyUpload {...item.option}>{item.innerHtml}</MyUpload>
       // case 'myImageUpload': return <MyImageUpload {...item.option}>{item.innerHtml}</MyImageUpload>
@@ -64,7 +65,7 @@ export default function ZeForm({ form, items }: ZeFormProps) {
   const initSpan = useMemo(() => form?.layout !== 'inline' ? 24 : undefined, [form])
 
   return (
-    <Form labelCol={{ span: 8 }} {...form}>
+    <Form {...form}>
       <Row gutter={form?.gutter || 24}>
         {
           items?.map((v, i) =>
@@ -91,7 +92,8 @@ export default function ZeForm({ form, items }: ZeFormProps) {
                                           label={index === 0 && vv.item?.label}
                                         >
                                           {renderFormItem(vv)}
-                                        </Form.Item>)
+                                        </Form.Item>
+                                    )
                                   }
                                   <MinusCircleOutlined className={`zeform-list-btn ${index ? '' : 'zeform-list-first-btn'}`} onClick={() => remove(name)} />
                                   {

@@ -14,9 +14,9 @@ export default {
     },
   ],
   plugins: [
-    babel(),
-    commonjs(),
     resolve(),
+    commonjs(),
+    babel(),
     tsPlugin(),
     postcss({
       extract: 'zeform.css', // 从 bundle 中提取 CSS 到单独的文件

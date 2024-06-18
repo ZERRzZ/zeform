@@ -68,7 +68,7 @@ export type ZeFormType =
   'input' | 'password' | 'textarea' | 'number' | 'mentions' |
   'radio' | 'checkbox' | 'select' | 'cascader' |
   'rate' | 'slider' | 'switch' | 'color' |
-  // 'year' | 'month' | 'date' | 'time' | 'dateTime' | 'yearRange' | 'monthRange' | 'dateRange' | 'timeRange' | 'dateTimeRange' |
+  'year' | 'month' | 'date' | 'time' | 'dateTime' | 'yearRange' | 'monthRange' | 'dateRange' | 'timeRange' | 'dateTimeRange' |
   // 'upload' | 'myUpload' | 'myImageUpload' | 'myVideoUpload' | 'myDocUpload' | 'myFileUpload' |
   'button' | 'submit' | 'reset' |
   'list' | 'custom'
