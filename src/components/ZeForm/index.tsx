@@ -1,6 +1,8 @@
 import React, { useMemo } from "react"
 import { Button, Cascader, Checkbox, Col, ColorPicker, ConfigProvider, Form, Input, InputNumber, Mentions, Radio, Rate, Row, Select, Slider, Switch } from "antd"
 import { DownCircleOutlined, MinusCircleOutlined, PlusOutlined, UpCircleOutlined } from '@ant-design/icons'
+import locale from 'antd/locale/zh_CN';
+import 'dayjs/locale/zh-cn';
 import { ZeFormItem, ZeFormProps } from "./type"
 import ZeTimeDate from "../ZeTimeDate"
 import './index.css'
@@ -65,62 +67,64 @@ export default function ZeForm({ form, items }: ZeFormProps) {
   const initSpan = useMemo(() => form?.layout !== 'inline' ? 24 : undefined, [form])
 
   return (
-    <Form {...form}>
-      <Row gutter={form?.gutter || 24}>
-        {
-          items?.map((v, i) =>
-            v.hidden ? '' :
-              <Col key={i} span={v.span || initSpan}>
-                {
-                  v.type === 'list' ?
-                    <Form.List name={v.list!.name} initialValue={v.list?.initialValue} rules={v.list?.rules}>
-                      {
-                        (fields, { add, remove, move }, { errors }) =>
-                          <Form.Item label={v.list?.label} tooltip={v.list?.tooltip}>
-                            {
-                              fields.map(({ key, name, ...field }, index) =>
-                                <div className="zeform-list" key={key}>
-                                  {
-                                    v.list?.items?.map((vv, ii) =>
-                                      vv.hidden ? '' :
-                                        <Form.Item
-                                          valuePropName={vv.type === 'switch' ? 'checked' : undefined}
-                                          {...field}
-                                          {...vv.item}
-                                          key={`${vv.item?.name}${ii}`}
-                                          name={[name, vv.item?.name as any]}
-                                          label={index === 0 && vv.item?.label}
-                                        >
-                                          {renderFormItem(vv)}
-                                        </Form.Item>
-                                    )
-                                  }
-                                  <MinusCircleOutlined className={`zeform-list-btn ${index ? '' : 'zeform-list-first-btn'}`} onClick={() => remove(name)} />
-                                  {
+    <ConfigProvider locale={locale}>
+      <Form {...form}>
+        <Row gutter={form?.gutter || 24}>
+          {
+            items?.map((v, i) =>
+              v.hidden ? '' :
+                <Col key={i} span={v.span || initSpan}>
+                  {
+                    v.type === 'list' ?
+                      <Form.List name={v.list!.name} initialValue={v.list?.initialValue} rules={v.list?.rules}>
+                        {
+                          (fields, { add, remove, move }, { errors }) =>
+                            <Form.Item label={v.list?.label} tooltip={v.list?.tooltip}>
+                              {
+                                fields.map(({ key, name, ...field }, index) =>
+                                  <div className="zeform-list" key={key}>
+                                    {
+                                      v.list?.items?.map((vv, ii) =>
+                                        vv.hidden ? '' :
+                                          <Form.Item
+                                            valuePropName={vv.type === 'switch' ? 'checked' : undefined}
+                                            {...field}
+                                            {...vv.item}
+                                            key={`${vv.item?.name}${ii}`}
+                                            name={[name, vv.item?.name as any]}
+                                            label={index === 0 && vv.item?.label}
+                                          >
+                                            {renderFormItem(vv)}
+                                          </Form.Item>
+                                      )
+                                    }
+                                    <MinusCircleOutlined className={`zeform-list-btn ${index ? '' : 'zeform-list-first-btn'}`} onClick={() => remove(name)} />
+                                    {
 
-                                    v.list?.isMove ?
-                                      <>
-                                        <UpCircleOutlined className={`zeform-list-btn ${index ? '' : 'zeform-list-first-btn'}`} onClick={() => move(index, index - 1)} />
-                                        <DownCircleOutlined className={`zeform-list-btn ${index ? '' : 'zeform-list-first-btn'}`} onClick={() => move(index, index + 1)} />
-                                      </>
-                                      : ''
-                                  }
-                                </div>
-                              )
-                            }
-                            <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />} />
-                            <Form.ErrorList errors={errors} />
-                          </Form.Item>
-                      }
-                    </Form.List>
-                    :
-                    <Form.Item valuePropName={v.type === 'switch' ? 'checked' : undefined} {...v.item}>{renderFormItem(v)}</Form.Item>
-                }
-              </Col>
-          )
-        }
-      </Row>
-    </Form >
+                                      v.list?.isMove ?
+                                        <>
+                                          <UpCircleOutlined className={`zeform-list-btn ${index ? '' : 'zeform-list-first-btn'}`} onClick={() => move(index, index - 1)} />
+                                          <DownCircleOutlined className={`zeform-list-btn ${index ? '' : 'zeform-list-first-btn'}`} onClick={() => move(index, index + 1)} />
+                                        </>
+                                        : ''
+                                    }
+                                  </div>
+                                )
+                              }
+                              <Button type="dashed" onClick={() => add()} block icon={<PlusOutlined />} />
+                              <Form.ErrorList errors={errors} />
+                            </Form.Item>
+                        }
+                      </Form.List>
+                      :
+                      <Form.Item valuePropName={v.type === 'switch' ? 'checked' : undefined} {...v.item}>{renderFormItem(v)}</Form.Item>
+                  }
+                </Col>
+            )
+          }
+        </Row>
+      </Form >
+    </ConfigProvider>
   )
 
 }
