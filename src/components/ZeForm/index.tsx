@@ -20,9 +20,9 @@ export default function ZeForm({ form, items }: ZeFormProps) {
       case 'checkbox': return <Checkbox.Group {...item.option} />
       case 'select':
         return <Select
-          placeholder='请选择'
           allowClear
           showSearch
+          placeholder='请选择'
           filterOption={(input, option) => (option?.label ?? '').toString().toLowerCase().includes(input.toLowerCase())}
           {...item.option}
         />

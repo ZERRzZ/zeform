@@ -2,30 +2,80 @@
 
 基于 antd 的表单组件，使用 json 配置表单，内置多种拓展，api 不变但能实现高速开发
 
-# 使用
+# 安装
 
 `npm i @chengzs/zeform` 或 `yarn add @chengzs/zeform`
 
 # 基础使用
 
-引入 css
+## 1. 引入 css
 
-`@import '@chengzs/zeform/lib/zeform.css' ;`
+`@import '@chengzs/zeform/lib/zeform.css'`
 
-页面中使用
+## 2. 快速使用
 
 ```tsx
-<ZeForm
-  form={{ layout: "horizontal", onFinish: (v) => console.log(v), gutter: 24 }}
-  items={items}
-/>
+// 引入
+import { ZeForm, ZeFormItem } from '@chengzs/zeform'
+// 指定类型
+const items: ZeFormItem[] = [
+  {
+    type: 'input',
+    item: { name: 'name', label: '姓名' },
+  },
+  { type: 'submit', span: 2 },
+  { type: 'reset', span: 22 },
+]
+// DOM使用
+return (
+  <ZeForm
+    form={{ layout: 'horizontal', onFinish: v => console.log(v) }}
+    items={items}
+  />
+)
 ```
 
-form 同 `<Form>` 标签 props
+# API
 
-`gutter` 为栅格系统的间隔
+```html
+<ZeForm form={form} items={items} />
+```
 
-`items` 则为表单项
+## form
+
+表单整体配置
+
+1. 几乎所有字段同 antd <Form> 标签 Props, 功能字段一致
+
+2. 额外字段：`gutter`, 为栅格系统的间隔值，单位为 px
+
+## items
+
+表单项配置
+
+1. `type`: 表单项类型
+
+```ts
+'input' | 'password' | 'textarea' | 'number' | 'mentions' |
+'radio' | 'checkbox' | 'select' | 'cascader' |
+'rate' | 'slider' | 'switch' | 'color' |
+'year' | 'month' | 'date' | 'time' | 'dateTime' | 'yearRange' | 'monthRange' | 'dateRange' | 'timeRange' | 'dateTimeRange' |
+// 'upload' | 'myUpload' | 'myImageUpload' | 'myVideoUpload' | 'myDocUpload' | 'myFileUpload' |
+'button' | 'submit' | 'reset' |
+'list' | 'custom'
+```
+
+2. `item`: 表单项 Props, 等同于 <Form.Item> 标签 Props, 功能字段一致
+
+3. `option`: 相应的表单控件 Props, 等同于相应表单控件的 Props, 功能字段一致
+
+4. `innerHtml`: 表单 children 值, 例如按钮
+
+5. `hidden`: 表单隐藏配置
+
+6. `span`: 栅格系统占位格数, 值在 0 - 24 之间
+
+# 深入使用
 
 ```tsx
 const options = [
