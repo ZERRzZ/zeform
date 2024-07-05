@@ -1,5 +1,5 @@
 import React, { useMemo } from "react"
-import { Button, Cascader, Checkbox, Col, ColorPicker, ConfigProvider, Form, Input, InputNumber, Mentions, Radio, Rate, Row, Select, Slider, Switch } from "antd"
+import { Button, Cascader, Checkbox, Col, ColorPicker, ConfigProvider, Form, Input, InputNumber, Mentions, Radio, Rate, Row, Select, Slider, Switch, Upload } from "antd"
 import { DownCircleOutlined, MinusCircleOutlined, PlusOutlined, UpCircleOutlined } from '@ant-design/icons'
 import locale from 'antd/locale/zh_CN';
 import 'dayjs/locale/zh-cn';
@@ -46,7 +46,7 @@ export default function ZeForm({ form, items }: ZeFormProps) {
       case 'dateRange':
       case 'timeRange':
       case 'dateTimeRange': return <ZeTimeDate type={item.type} option={item.option} />
-      // case 'upload': return <Upload {...item.option}>{item.innerHtml}</Upload>
+      case 'originUpload': return <Upload {...item.option}>{item.innerHtml}</Upload>
       // case 'myUpload': return <MyUpload {...item.option}>{item.innerHtml}</MyUpload>
       // case 'myImageUpload': return <MyImageUpload {...item.option}>{item.innerHtml}</MyImageUpload>
       // case 'myVideoUpload': return <MyVideoUpload {...item.option}>{item.innerHtml}</MyVideoUpload>
@@ -57,8 +57,6 @@ export default function ZeForm({ form, items }: ZeFormProps) {
       case 'reset': return <Button htmlType="reset" {...item.option}>{item.innerHtml || '重置'}</Button>
       case 'custom': return item.innerHtml
       // case 'cron': return <MyCron {...item.option} />
-      // case 'oneLevelOpt': return <MyOneLevelOpt {...item.option} />
-      // case 'multiLevelOpt': return <MyMultiLevelOpt {...item.option} />
       // case 'editor': return readonly ? <ViewItem type={item.type} /> : <MyEditor {...item.option} />
       // case 'code': return readonly ? <ViewItem type={item.type} /> : <MyCode {...item.option} />
     }

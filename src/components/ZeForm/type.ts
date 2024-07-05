@@ -69,7 +69,8 @@ export type ZeFormType =
   'radio' | 'checkbox' | 'select' | 'cascader' |
   'rate' | 'slider' | 'switch' | 'color' |
   'year' | 'month' | 'date' | 'time' | 'dateTime' | 'yearRange' | 'monthRange' | 'dateRange' | 'timeRange' | 'dateTimeRange' |
-  // 'upload' | 'myUpload' | 'myImageUpload' | 'myVideoUpload' | 'myDocUpload' | 'myFileUpload' |
+  'originUpload' | 'zeUpload' |
+  // 'myUpload' | 'myImageUpload' | 'myVideoUpload' | 'myDocUpload' | 'myFileUpload' |
   'button' | 'submit' | 'reset' |
   'list' | 'custom'
 
