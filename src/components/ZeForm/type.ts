@@ -1,6 +1,6 @@
-import { ReactNode } from "react"
-import { FormItemProps, FormProps } from "antd"
-import { Gutter } from "antd/es/grid/row"
+import { ReactNode } from "react";
+import { FormItemProps, FormProps } from "antd";
+import { Gutter } from "antd/es/grid/row";
 
 /**
  * 表单 Props
@@ -8,8 +8,8 @@ import { Gutter } from "antd/es/grid/row"
  * @param items 表单项配置
  */
 export interface ZeFormProps {
-  form?: ZeFormForm
-  items?: ZeFormItem[]
+  form?: ZeFormForm;
+  items?: ZeFormItem[];
 }
 
 /**
@@ -18,7 +18,7 @@ export interface ZeFormProps {
  * @param gutter 间隔，antd 栅格系统的 gutter 值
  */
 export interface ZeFormForm extends FormProps {
-  gutter?: Gutter | [Gutter, Gutter]
+  gutter?: Gutter | [Gutter, Gutter];
 }
 
 /**
@@ -32,13 +32,13 @@ export interface ZeFormForm extends FormProps {
  * @param span 占位格数，antd 栅格系统的 span 值
  */
 export interface ZeFormItem {
-  type: ZeFormType
-  item?: FormItemProps
-  list?: ZeFormList
-  option?: any
-  innerHtml?: ReactNode
-  hidden?: boolean
-  span?: number
+  type: ZeFormType;
+  item?: FormItemProps;
+  list?: ZeFormList;
+  option?: any;
+  innerHtml?: ReactNode;
+  hidden?: boolean;
+  span?: number;
 }
 
 /**
@@ -52,27 +52,54 @@ export interface ZeFormItem {
  * @param items list 中的表单
  */
 export interface ZeFormList {
-  name: string
-  label?: string
-  tooltip?: string
-  rules?: { validator: (rule: any, names: any) => Promise<any>, message: string }[]
-  initialValue?: any[]
-  isMove?: boolean
-  items?: ZeFormItem[]
+  name: string;
+  label?: string;
+  tooltip?: string;
+  rules?: {
+    validator: (rule: any, names: any) => Promise<any>;
+    message: string;
+  }[];
+  initialValue?: any[];
+  isMove?: boolean;
+  items?: ZeFormItem[];
 }
 
 /**
  * 我的表单表单项类型
  */
 export type ZeFormType =
-  'input' | 'password' | 'textarea' | 'number' | 'mentions' |
-  'radio' | 'checkbox' | 'select' | 'cascader' |
-  'rate' | 'slider' | 'switch' | 'color' |
-  'year' | 'month' | 'date' | 'time' | 'dateTime' | 'yearRange' | 'monthRange' | 'dateRange' | 'timeRange' | 'dateTimeRange' |
-  'originUpload' | 'zeUpload' |
-  // 'myUpload' | 'myImageUpload' | 'myVideoUpload' | 'myDocUpload' | 'myFileUpload' |
-  'button' | 'submit' | 'reset' |
-  'list' | 'custom'
+  | "input"
+  | "password"
+  | "textarea"
+  | "number"
+  | "mentions"
+  | "radio"
+  | "checkbox"
+  | "select"
+  | "cascader"
+  | "rate"
+  | "slider"
+  | "switch"
+  | "color"
+  | "year"
+  | "month"
+  | "date"
+  | "time"
+  | "dateTime"
+  | "yearRange"
+  | "monthRange"
+  | "dateRange"
+  | "timeRange"
+  | "dateTimeRange"
+  | "originUpload"
+  | "cron"
+  | "editor"
+  | "code"
+  | "button"
+  | "submit"
+  | "reset"
+  | "list"
+  | "custom";
 
 // export interface ZeFormOptions {
 //   input?: InputProps

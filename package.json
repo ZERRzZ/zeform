@@ -44,5 +44,13 @@
     "rollup-plugin-postcss": "^4.0.2",
     "tslib": "^2.6.3",
     "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "@codemirror/lang-javascript": "^6.2.2",
+    "@uiw/react-codemirror": "^4.23.7",
+    "@wangeditor/editor": "^5.1.23",
+    "@wangeditor/editor-for-react": "^1.0.6",
+    "cron-parser": "^4.9.0",
+    "qnn-react-cron": "^2.0.1"
   }
 }
