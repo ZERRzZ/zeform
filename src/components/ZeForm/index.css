@@ -1,3 +1,13 @@
+.zeform {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+.zeform > .ant-form-item {
+  width: 100%;
+}
+
 .zeform-list {
   display: flex;
   gap: 1em;

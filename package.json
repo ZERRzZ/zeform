@@ -13,7 +13,8 @@
     "type": "git",
     "url": "https://github.com/ZERRzZ/zeform"
   },
-  "main": "lib/zeform.js",
+  "main": "lib/zeform-cjs.js",
+  "module": "lib/zeform-es.js",
   "typings": "lib/index.d.ts",
   "scripts": {
     "dev": "npx rollup -wc rollup.config.mjs",

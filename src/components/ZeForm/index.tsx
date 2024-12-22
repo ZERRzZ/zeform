@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import {
   Button,
   Cascader,
@@ -24,8 +24,8 @@ import {
   UpCircleOutlined,
 } from "@ant-design/icons";
 
-import { ZeFormItem, ZeFormProps } from "./type";
 import "./index.css";
+import { ZeFormItem, ZeFormList, ZeFormProps } from "./type";
 
 export default function ZeForm({ form, items }: ZeFormProps) {
   //
@@ -131,15 +131,20 @@ export default function ZeForm({ form, items }: ZeFormProps) {
 
   const spawnFormList = (v: ZeFormItem) => (
     <Form.List
-      name={v.list!.name}
-      initialValue={v.list?.initialValue}
-      rules={v.list?.rules}
+      name={v.item?.name}
+      initialValue={v.item?.initialValue}
+      rules={(v.item as ZeFormList)?.rules}
     >
       {(fields, { add, remove, move }, { errors }) => (
-        <Form.Item label={v.list?.label} tooltip={v.list?.tooltip}>
+        <Form.Item
+          {...v.item}
+          name={undefined}
+          initialValue={undefined}
+          rules={undefined}
+        >
           {fields.map(({ key, name, ...field }, index) => (
             <div className="zeform-list" key={key}>
-              {v.list?.items?.map((vv, ii) =>
+              {(v.item as ZeFormList)?.items?.map((vv, ii) =>
                 vv.hidden ? (
                   ""
                 ) : (
@@ -161,7 +166,7 @@ export default function ZeForm({ form, items }: ZeFormProps) {
                 }`}
                 onClick={() => remove(name)}
               />
-              {v.list?.isMove ? (
+              {(v.item as ZeFormList)?.isMove ? (
                 <>
                   <UpCircleOutlined
                     className={`zeform-list-btn ${
@@ -194,10 +199,16 @@ export default function ZeForm({ form, items }: ZeFormProps) {
   );
 
   return (
-    <Form {...form}>
-      {items?.map((v) =>
-        v.hidden ? "" : v.type === "list" ? spawnFormList(v) : spawnFormItem(v)
-      )}
+    <Form {...form} className={form?.layout === "inline" ? "" : "zeform"}>
+      {items?.map((v, i) => (
+        <Fragment key={i}>
+          {v.hidden
+            ? ""
+            : v.type === "list"
+            ? spawnFormList(v)
+            : spawnFormItem(v)}
+        </Fragment>
+      ))}
     </Form>
   );
 }
