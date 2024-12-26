@@ -15,54 +15,105 @@
 ## 2. 快速使用
 
 ```tsx
-// 引入
-import { ZeForm, ZeFormItem } from '@chengzs/zeform'
-// 指定类型
-const items: ZeFormItem[] = [
-  {
-    type: 'input',
-    item: { name: 'name', label: '姓名' },
-  },
-  { type: 'submit', span: 2 },
-  { type: 'reset', span: 22 },
-]
-// DOM使用
-return (
-  <ZeForm
-    form={{ layout: 'horizontal', onFinish: v => console.log(v) }}
-    items={items}
-  />
-)
+export default function FormDemo() {
+  const form: FormProps = {
+    layout: "horizontal",
+    labelCol: { span: 2 },
+    onFinish: (values) => {
+      console.log(values);
+    },
+  };
+
+  const items: ZeFormItem[] = [
+    {
+      type: "text",
+      item: {
+        label: "text",
+        name: "text",
+        labelCol: { span: 4 },
+        style: { width: "50%" },
+      },
+      option: { prefix: <InfoCircleOutlined /> },
+    },
+    {
+      type: "password",
+      item: {
+        label: "password",
+        name: "password",
+        labelCol: { span: 4 },
+        style: { width: "50%" },
+      },
+    },
+    {
+      type: "textarea",
+      item: { label: "textarea", name: "textarea" },
+    },
+  ];
+
+  return <ZeForm form={form} items={items} />;
+}
 ```
 
 # API
-
-```html
-<ZeForm form={form} items={items} />
-```
 
 ## form
 
 表单整体配置
 
-1. 几乎所有字段同 antd <Form> 标签 Props, 功能字段一致
-
-2. 额外字段：`gutter`, 为栅格系统的间隔值，单位为 px
+1. 所有字段同 antd <Form> 标签 Props, 功能字段一致
 
 ## items
 
-表单项配置
+表单项配置，类型如下
+
+```ts
+/**
+ * 表单项配置
+ * @param type 类型
+ * @param item 表单项 Props，等同于 <Form.Item> 标签 Props
+ * @param option 相应的表单控件 Props
+ * @param innerHtml 表单内容
+ * @param hidden 隐藏
+ */
+export interface ZeFormItem {
+  type: ZeFormTypes;
+  item?: FormItemProps | ZeFormList;
+  option?: any;
+  innerHtml?: ReactNode;
+  hidden?: boolean;
+}
+```
 
 1. `type`: 表单项类型
 
 ```ts
-'input' | 'password' | 'textarea' | 'number' | 'mentions' |
-'radio' | 'checkbox' | 'select' | 'cascader' |
-'rate' | 'slider' | 'switch' | 'color' |
-'year' | 'month' | 'date' | 'time' | 'dateTime' | 'yearRange' | 'monthRange' | 'dateRange' | 'timeRange' | 'dateTimeRange' |
-// 'upload' | 'myUpload' | 'myImageUpload' | 'myVideoUpload' | 'myDocUpload' | 'myFileUpload' |
-'button' | 'submit' | 'reset' |
-'list' | 'custom'
+/**
+ * 我的表单表单项类型
+ */
+export type ZeFormTypes =
+  | "text"
+  | "password"
+  | "textarea"
+  | "number"
+  | "mentions"
+  | "radio"
+  | "checkbox"
+  | "select"
+  | "cascader"
+  | "rate"
+  | "slider"
+  | "switch"
+  | "color"
+  | "time"
+  | "timeRange"
+  | "date"
+  | "dateRange"
+  | "upload"
+  | "button"
+  | "submit"
+  | "reset"
+  | "list"
+  | "custom";
 ```
 
 2. `item`: 表单项 Props, 等同于 <Form.Item> 标签 Props, 功能字段一致
@@ -73,82 +124,44 @@ return (
 
 5. `hidden`: 表单隐藏配置
 
-6. `span`: 栅格系统占位格数, 值在 0 - 24 之间
-
 # 深入使用
-
-```tsx
-const options = [
-  { value: "1", label: "1", children: [{ value: "1-1", label: "1-1" }] },
-  { value: "2", label: "2", children: [{ value: "2-1", label: "2-1" }] },
-  { value: "3", label: "3", children: [{ value: "3-1", label: "3-1" }] },
-];
-
-const items: ZeFormItem[] = [
-  {
-    type: "input",
-    item: { name: "name", label: "姓名" },
-  },
-  {
-    type: "textarea",
-    item: { name: "info", label: "自我介绍" },
-  },
-  {
-    type: "number",
-    item: { name: "age", label: "年龄" },
-  },
-  {
-    type: "radio",
-    item: { name: "like", label: "喜好" },
-    option: { options },
-  },
-  {
-    type: "checkbox",
-    item: { name: "love", label: "兴趣" },
-    option: { options },
-  },
-  {
-    type: "select",
-    item: { name: "type", label: "类型" },
-    option: { options },
-  },
-  {
-    type: "cascader",
-    item: { name: "address", label: "地址" },
-    option: { options },
-  },
-  {
-    type: "date",
-    item: { name: "date", label: "日期" },
-  },
-  { type: "submit", span: 2 },
-  { type: "reset", span: 22 },
-];
-```
 
 表单列表的配置，`type = list`
 
 ```tsx
+/**
+ * list 表单项
+ * @param rules 整体校验，必须是自定义校验
+ * @param isMove 是否显示上移下移
+ * @param items list 中的表单
+ */
+export interface ZeFormList extends FormItemProps {
+  rules?: {
+    validator: (rule: any, names: any) => Promise<any>;
+    message: string;
+  }[];
+  isMove?: boolean;
+  items?: ZeFormItem[];
+}
+```
+
+```tsx
+// item 配置
 {
   type: "list",
-  list: {
+  item: {
+    label: "list",
     name: "list",
-    label: "列表",
-    isMove: true,
     items: [
       {
-        type: "input",
-        item: { label: "姓名1", name: "cname1" },
+        type: "text",
+        item: { label: "text", name: "text" },
       },
       {
-        type: "input",
-        item: { label: "姓名2", name: "cname2" },
-      },
-      {
-        type: "textarea",
-        item: { label: "姓名3", name: "cname3" },
+        type: "password",
+        item: { label: "password", name: "password" },
       },
     ],
   },
-}
+},
 ```
